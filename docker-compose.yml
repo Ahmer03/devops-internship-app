@@ -49,3 +49,8 @@ volumes:
 
 networks:
   backend:
+# ------------------SUMMARY------------------
+# Under services, the first one is web, your app. The build lines say “build the image from this folder, and only up to the final stage called runtime”. The image line gives the built box its name. The env_file line says “hand every setting in the dot env file to this container when it starts”. The ports line says eight-zero-eight-zero to three-thousand. The left number is the door on your laptop, and the right number is the port the app listens on inside the box. The depends_on lines say “don’t start the app until Postgres and Redis report healthy”. The networks line puts it in the hallway called backend, and restart says “if it crashes, start it again”.
+# The second service is db, which is Postgres. It uses a ready-made image, so there’s no build. Under environment, it sets the username, password and database name, and the dollar-brace values mean “read these from the dot env file”. The question mark part means “stop with an error if a value is missing”. The volumes line connects the storage named db_data to the folder where Postgres keeps its files, so the data lives outside the box. The healthcheck asks Postgres every five seconds “are you ready?”. There’s no ports section here, so there’s no door to the outside.
+# The third service is redis, also ready-made. It has a healthcheck that sends a ping and expects a reply, and it sits in the same hallway. It has no volume and no ports.
+# At the bottom, the volumes section creates the storage called db_data, and the networks section creates the hallway called backend. And remember that DB_HOST equals db in your dot env file matches the service name, which is how the app finds the database inside the hallway.
