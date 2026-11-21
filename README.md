@@ -1,5 +1,7 @@
 # DevOps Internship App: Task Tracker API
 
+[![CI Pipeline](https://github.com/Ahmer03/devops-internship-app/actions/workflows/ci.yml/badge.svg)](https://github.com/Ahmer03/devops-internship-app/actions/workflows/ci.yml)
+
 A small Node.js + Express API used to practice containerization. It stores tasks in **PostgreSQL** and uses **Redis** as a cache and visit counter.
 
 ## Architecture
