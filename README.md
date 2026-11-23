@@ -90,3 +90,22 @@ docker compose logs web        # app logs
 docker compose down            # stop and remove containers (data is kept)
 docker compose down -v         # also delete the database volume (data is lost)
 ```
+## CI/CD pipeline
+
+The workflow in `.github/workflows/ci.yml` runs on every push and pull request to `main`.
+
+| Job | What it does | Runs when |
+|---|---|---|
+| Lint | Runs ESLint (`npm run lint`) | Always |
+| Unit Tests | Runs Jest tests (`npm test`) | After lint passes |
+| Docker Build | Builds the image to prove the Dockerfile works | After tests pass |
+| Push Image to GHCR | Pushes the image to GitHub Container Registry | Only on push to `main` |
+| Pipeline Summary | Writes a pass/fail table on the Actions tab | Always |
+
+Pull the published image:
+
+```
+docker pull ghcr.io/ahmer03/devops-internship-app:latest
+```
+
+Each image has two tags: `latest` (newest) and the commit SHA (exact version).
